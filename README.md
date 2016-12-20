@@ -7,10 +7,10 @@
    para usuarios y desarrolladores de Geant4 Versión 10.2  
 
 ## ------------------------------------------------------------
- ´´´
+ ```
  ~~Autores~~ *Morales.A - Torres.N* 
  ~~email~~ **jntorresr@udistrital.edu.co**
  ~~Version~~ **0.1**
  ~~Date~~ **16-12-2016**
- ´´´
+ ```
 ## ------------------------------------------------------------
