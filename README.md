@@ -8,9 +8,9 @@
 
 ## ------------------------------------------------------------
  ```
- ~~Autores~~ *Morales.A - Torres.N* 
- ~~email~~ **jntorresr@udistrital.edu.co**
- ~~Version~~ **0.1**
- ~~Date~~ **16-12-2016**
+ Autores Morales.A - Torres.N 
+ email jntorresr@udistrital.edu.co
+ Version 0.1
+ Date 16-12-2016
  ```
 ## ------------------------------------------------------------
