@@ -8,9 +8,12 @@
 
 ## ------------------------------------------------------------
  ```
- Autores Morales.A - Torres.N 
- email jntorresr@udistrital.edu.co
- Version 0.1
- Date 16-12-2016
+ author's:	 Morales.A - Torres.N 
+ institution: 	 Distrity University Francisco José de Caldas
+ email:		 jntorresr@udistrital.edu.co
+ Country:	 Colombia
+ Versión:	 0.1
+ Date:		 16-12-2016
+ Licence:	 LGPL
  ```
 ## ------------------------------------------------------------
