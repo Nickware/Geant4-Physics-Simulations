@@ -12,8 +12,8 @@
  institution: 	 Distrity University Francisco José de Caldas
  email:		 jntorresr@udistrital.edu.co
  Country:	 Colombia
- Versión:	 0.1
- Date:		 16-12-2016
+ Versión:	 0.0.2
+ Date:		 04-10-2017
  Licence:	 LGPL
  ```
 ## ------------------------------------------------------------
