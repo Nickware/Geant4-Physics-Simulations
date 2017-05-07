@@ -13,7 +13,7 @@
  email:		 jntorresr@udistrital.edu.co
  Country:	 Colombia
  Versión:	 0.0.3
- Date:		 09-05-2017
+ Date:		 09-05-2017 (Fecha de Liberación)
  Licence:	 LGPL
  ```
 ## ------------------------------------------------------------
