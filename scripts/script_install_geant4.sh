@@ -2,11 +2,11 @@
 #Instala los requerimientos en el SO, 
 #prepara el configurador para Geant4
 #Construye los binarios de Geant4
-#Probado en Scientific Linux 7.3
+#Probado en Fedora 41
 #Autores: A.Morales - N.Torres
 #jntorresr@udistrital.edu.co
-#Version: 0.0.3
-#Fecha: 05-09-2017
+#Version: 0.0.4
+#Fecha: 07-04-2025
 
 ############################################################################################################################################
 echo "---------------------------Warning------------------------------------"
@@ -18,7 +18,7 @@ yum repolist
 echo "importando clave pública" 
 rpm -import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 echo "Descargando clave pública"
-rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
+rpm -Uvh https://www.elrepo.org/elrepo-release-9.el9.elrepo.noarch.rpm
 echo "Requerimientos necesarios para instalar Geant4" 
 echo "Basado en el manual de instalación para construir binarios de Geant4"
 echo "Véase manual versión 10.2 Pag 3"
