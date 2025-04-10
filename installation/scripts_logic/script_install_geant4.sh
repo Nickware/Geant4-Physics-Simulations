@@ -10,20 +10,20 @@ log_sugerencias="sugerencias_paquetes.log"
 
 check_and_install_package() {
     local pkg="$1"
-    echo "🔍 Verificando: $pkg"
+    echo " Verificando: $pkg"
     if dnf list available "$pkg" &>/dev/null; then
-        echo "✅ Instalando: $pkg"
+        echo " Instalando: $pkg"
         dnf install -y "$pkg"
     else
-        echo "❌ No disponible: $pkg" | tee -a "$log_faltantes"
-        echo "🔎 Sugerencias para $pkg:" | tee -a "$log_sugerencias"
+        echo " No disponible: $pkg" | tee -a "$log_faltantes"
+        echo " Sugerencias para $pkg:" | tee -a "$log_sugerencias"
         dnf list available | grep -i "${pkg}" | tee -a "$log_sugerencias"
         echo "--------------------------------------------------" >> "$log_sugerencias"
     fi
 }
 
-echo "⚠️ Este script debe ejecutarse como root"
-echo "📦 Actualizando repositorios..."
+echo " Este script debe ejecutarse como root"
+echo " Actualizando repositorios..."
 dnf check-update
 dnf install -y epel-release
 dnf repolist
@@ -32,8 +32,8 @@ dnf repolist
 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 dnf install -y https://www.elrepo.org/elrepo-release-9.el9.elrepo.noarch.rpm
 
-echo "📚 Requerimientos para Geant4 (manual 10.2, pág. 3)"
-echo "🛠️ Instalando dependencias..."
+echo " Requerimientos para Geant4 (manual 10.2, pág. 3)"
+echo " Instalando dependencias..."
 
 paquetes=(
     cmake cmake-gui kernel-devel xerces-c-devel
@@ -45,22 +45,22 @@ for pkg in "${paquetes[@]}"; do
     check_and_install_package "$pkg"
 done
 
-echo "📁 Preparando instalación"
-read -p "📂 ¿Dónde desea instalar Geant4? " path_geant4
+echo " Preparando instalación"
+read -p " ¿Dónde desea instalar Geant4? " path_geant4
 mkdir -p "$path_geant4"
 
-read -p "📂 ¿Dónde desea trabajar temporalmente (descarga y build)? " path_temp
+read -p " ¿Dónde desea trabajar temporalmente (descarga y build)? " path_temp
 cd "$path_temp" || exit
 
-read -p "🔗 Ingrese el link de descarga de Geant4: " geant_source
+read -p " Ingrese el link de descarga de Geant4: " geant_source
 wget "$geant_source"
 tar -xvf geant4*.tar.gz
 
-read -p "📁 Nombre del directorio de build (ej: geant4-build): " dir_build
+read -p " Nombre del directorio de build (ej: geant4-build): " dir_build
 mkdir "$dir_build"
 cd "$dir_build" || exit
 
-read -p "📁 Ruta del código fuente extraído: " path_source
+read -p " Ruta del código fuente extraído: " path_source
 
 cmake -DCMAKE_INSTALL_PREFIX="$path_geant4" \
       -DGEANT4_INSTALL_DATA=ON \
@@ -70,12 +70,12 @@ cmake -DCMAKE_INSTALL_PREFIX="$path_geant4" \
       "$path_source"
 
 number_proc=$(nproc)
-echo "🧱 Compilando con $number_proc núcleos..."
+echo " Compilando con $number_proc núcleos..."
 make -j"$number_proc" VERBOSE=1
 
-echo "✅ Proceso finalizado."
+echo " Proceso finalizado."
 
 if [ -s "$log_faltantes" ]; then
-    echo "⚠️ Algunos paquetes no se pudieron instalar. Revisa $log_faltantes"
-    echo "💡 También puedes revisar $log_sugerencias para posibles alternativas."
+    echo " Algunos paquetes no se pudieron instalar. Revisa $log_faltantes"
+    echo " También puedes revisar $log_sugerencias para posibles alternativas."
 fi
