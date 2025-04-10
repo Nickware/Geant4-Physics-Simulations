@@ -13,18 +13,18 @@ FEDORA_VERSION=$(rpm -E %fedora)
 # Función para verificar, instalar y loguear paquetes
 check_and_install() {
     local package=$1
-    echo "🔍 Verificando: $package"
+    echo " Verificando: $package"
 
     if dnf list "$package" &>/dev/null; then
-        echo "✅ Instalando: $package"
+        echo " Instalando: $package"
         if dnf -y install "$package" &>> "$LOG_SUCCESS"; then
             echo "$package INSTALADO correctamente." >> "$LOG_SUCCESS"
         else
-            echo "⛔ Error al instalar $package" | tee -a "$LOG_FAIL"
+            echo " Error al instalar $package" | tee -a "$LOG_FAIL"
         fi
     else
-        echo "⚠️  El paquete '$package' no se encontró." | tee -a "$LOG_FAIL"
-        echo "🔎 Buscando paquetes similares a '$package':" >> "$LOG_FAIL"
+        echo "  El paquete '$package' no se encontró." | tee -a "$LOG_FAIL"
+        echo " Buscando paquetes similares a '$package':" >> "$LOG_FAIL"
         dnf search "$package" | tee -a "$LOG_FAIL"
         echo "" >> "$LOG_FAIL"
     fi
@@ -38,11 +38,11 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-echo "🖥️  Versión de Fedora:"
+echo " Versión de Fedora:"
 cat /etc/fedora-release
 echo ""
 
-echo "📦 Agregando repositorios..."
+echo " Agregando repositorios..."
 dnf -y install epel-release
 
 RPMFUSION_FREE="https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${FEDORA_VERSION}.noarch.rpm"
@@ -51,9 +51,9 @@ dnf -y install "$RPMFUSION_FREE" "$RPMFUSION_NONFREE"
 
 # ElRepo es opcional, puede fallar sin afectar el flujo
 dnf -y install https://www.elrepo.org/elrepo-release-9.el9.elrepo.noarch.rpm || \
-    echo "⚠️  ElRepo no es compatible con esta versión de Fedora."
+    echo " ElRepo no es compatible con esta versión de Fedora."
 
-echo "🔄 Actualizando sistema..."
+echo " Actualizando sistema..."
 dnf -y upgrade
 
 # === LISTA DE PAQUETES ===
@@ -89,13 +89,13 @@ packages=(
     java-21-openjdk-devel
 )
 
-echo "📦 Comenzando la instalación de paquetes..."
+echo " Comenzando la instalación de paquetes..."
 for pkg in "${packages[@]}"; do
     check_and_install "$pkg"
 done
 
 # === RESUMEN FINAL ===
 echo ""
-echo "📝 Instalación completada. Consulta los siguientes archivos de log:"
-echo "  ✅ $LOG_SUCCESS : Paquetes instalados con éxito."
-echo "  ❌ $LOG_FAIL    : Paquetes no encontrados o con errores, junto con sugerencias."
+echo " Instalación completada. Consulta los siguientes archivos de log:"
+echo "  $LOG_SUCCESS : Paquetes instalados con éxito."
+echo "  $LOG_FAIL    : Paquetes no encontrados o con errores, junto con sugerencias."
