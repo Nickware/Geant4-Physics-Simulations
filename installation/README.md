@@ -93,6 +93,6 @@ Uso libre bajo licencia MIT o similar.
 
 ---
 
-¡Automatiza el entorno Fedora de manera segura y eficiente empleando Geant4 Y ROOT!
+¡Este script automatiza el entorno Fedora, de manera segura y eficiente empleando Geant4 Y ROOT!
 
 
