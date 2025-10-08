@@ -1,6 +1,6 @@
-# Simulación Computacional en Física: Electromagnetismo, Física Moderna y Nuclear con Métodos Monte Carlo
+# Simulación Computacional en Física
 
-Este repositorio alberga el material del curso Simulación Computacional en Física: Electromagnetismo, Física Moderna y Nuclear con Métodos Monte Carlo.
+Este repositorio alberga el material del curso Simulación Computacional en Física enmarcado en Electromagnetismo, Física Moderna y Nuclear con Métodos Monte Carlo.
 
 ---
 
