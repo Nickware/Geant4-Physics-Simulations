@@ -1,4 +1,4 @@
-## Flujo de trabajo completo: Simulación con Geant4 y análisis con ROOT
+## Simulación con Geant4 y análisis con ROOT (Flujo de trabajo)
 
 Este readme describe paso a paso cómo realizar una simulación de interacción de partículas con la materia usando **Geant4** y analizar los resultados con **ROOT**. Incluye la estructura de archivos, comandos y recomendaciones para un flujo de trabajo eficiente y reproducible.
 
@@ -34,7 +34,7 @@ ProyectoGeant4/
 - Implementa la clase `DetectorConstruction` en los archivos:
     - `include/DetectorConstruction.hh`
     - `src/DetectorConstruction.cc`
-- Define materiales (usando NIST o personalizados) y la geometría (volumen mundo, detectores, blancos, etc.).
+- Define materiales (usando NIST o personalizados) y la geometría (volumen del mundo, detectores, blancos, etc.).
 
 
 #### 3.2. Configuración de la física y fuentes de partículas
