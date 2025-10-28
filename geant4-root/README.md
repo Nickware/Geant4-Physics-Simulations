@@ -31,21 +31,21 @@ ProyectoGeant4/
 
 #### 3.1. Definición del entorno físico (Geometría y Materiales)
 
-- Implementa la clase `DetectorConstruction` en los archivos:
+- Implementar la clase `DetectorConstruction` en los archivos:
     - `include/DetectorConstruction.hh`
     - `src/DetectorConstruction.cc`
-- Define materiales (usando NIST o personalizados) y la geometría (volumen del mundo, detectores, blancos, etc.).
+- Definir materiales (usando NIST o personalizados) y la geometría (volumen del mundo, detectores, blancos, etc.).
 
 
 #### 3.2. Configuración de la física y fuentes de partículas
 
-- En el archivo `main.cc`, selecciona la lista de física adecuada (por ejemplo, `QGSP_BERT`).
-- Implementa o selecciona el generador primario de partículas según el experimento.
+- En el archivo `main.cc`, seleccionar la lista de física adecuada (por ejemplo, `QGSP_BERT`).
+- Implementar o seleccionar el generador primario de partículas según el experimento.
 
 
 #### 3.3. Implementación de acciones de usuario
 
-- (Opcional para el flujo básico) Añade clases para gestionar la recogida de datos, como energía depositada, trayectorias, etc.
+- (Opcional para el flujo básico) Añadir clases para gestionar la recogida de datos, como energía depositada, trayectorias, etc.
 
 
 #### 3.4. Compilación del proyecto
@@ -66,18 +66,18 @@ make
 ./Geant4Example vis.mac
 ```
 
-- Usa la ventana gráfica para inspeccionar la geometría y verificar que los volúmenes y materiales están correctamente definidos.
+- Usar la ventana gráfica para inspeccionar la geometría y verificar que los volúmenes y materiales están correctamente definidos.
 
 
 #### 3.6. Almacenamiento y extracción de datos
 
-- Implementa el almacenamiento de resultados (por ejemplo, energía depositada) usando el sistema de análisis de Geant4 (`G4AnalysisManager`).
-- Guarda los datos en archivos `.root` o en archivos de texto para su posterior análisis.
+- Implementar el almacenamiento de resultados (por ejemplo, energía depositada) usando el sistema de análisis de Geant4 (`G4AnalysisManager`).
+- Guardar los datos en archivos `.root` o en archivos de texto para su posterior análisis.
 
 
 #### 3.7. Análisis y visualización con ROOT
 
-- Abre los archivos `.root` generados:
+- Abrir los archivos `.root` generados:
 
 ```bash
 root -l
@@ -91,7 +91,7 @@ TH1F *h = (TH1F*)f->Get("Edep");
 h->Draw();
 ```
 
-- Realiza análisis estadísticos, ajustes, sumas de histogramas y exporta gráficos según sea necesario.
+- Realizar análisis estadísticos, ajustes, sumas de histogramas y exportar gráficos según sea necesario.
 
 
 ### 4. Tabla resumen del flujo de trabajo
