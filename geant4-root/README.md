@@ -1,6 +1,6 @@
 ## Simulación con Geant4 y análisis con ROOT (Flujo de trabajo)
 
-Este readme describe paso a paso cómo realizar una simulación de interacción de partículas con la materia usando **Geant4** y analizar los resultados con **ROOT**. Incluye la estructura de archivos, comandos y recomendaciones para un flujo de trabajo eficiente y reproducible.
+Este readme describe, paso a paso, cómo realizar una simulación de interacción de partículas con la materia usando **Geant4** y analizar los resultados con **ROOT**. Incluye la estructura de los archivos, comandos y recomendaciones para un flujo de trabajo reproducible.
 
 ### 1. Estructura del proyecto
 
@@ -34,7 +34,7 @@ ProyectoGeant4/
 - Implementar la clase `DetectorConstruction` en los archivos:
     - `include/DetectorConstruction.hh`
     - `src/DetectorConstruction.cc`
-- Definir materiales (usando NIST o personalizados) y la geometría (volumen del mundo, detectores, blancos, etc.).
+- Definir los materiales (usando NIST o personalizados) y la geometría (volumen del mundo, detectores, blancos, etc.).
 
 
 #### 3.2. Configuración de la física y fuentes de partículas
@@ -66,13 +66,13 @@ make
 ./Geant4Example vis.mac
 ```
 
-- Usar la ventana gráfica para inspeccionar la geometría y verificar que los volúmenes y materiales están correctamente definidos.
+- Usar la ventana gráfica para inspeccionar la geometría y verificar que los volúmenes y materiales estén correctamente definidos.
 
 
 #### 3.6. Almacenamiento y extracción de datos
 
-- Implementar el almacenamiento de resultados (por ejemplo, energía depositada) usando el sistema de análisis de Geant4 (`G4AnalysisManager`).
-- Guardar los datos en archivos `.root` o en archivos de texto para su posterior análisis.
+- Implementar el almacenamiento de resultados (por ejemplo, energía depositada) mediante el sistema de análisis de Geant4 (`G4AnalysisManager`).
+- Guardar los datos en archivos `.root` o en archivos de texto para su análisis posterior.
 
 
 #### 3.7. Análisis y visualización con ROOT
