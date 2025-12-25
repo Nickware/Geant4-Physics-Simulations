@@ -46,7 +46,7 @@ sudo apt-get install libxerces-c-dev libxmu-dev libmotif-dev libx11-dev
 
 Seguir estos pasos para compilar la simulación. Es una buena práctica usar un directorio de compilación separado del código fuente.
 
-1. Navega al directorio del ejemplo `rdecay01`:
+1. Navegar al directorio del ejemplo `rdecay01`:
 
    Bash
 
@@ -99,4 +99,4 @@ Bash
 
 Esta ejecución generará un archivo de salida llamado **`rdecay01.root`** en el directorio `build`. Este archivo contendrá todos los datos para el análisis.
 
-¡Felicidades! Ha completado el ciclo de trabajo de simulación, desde la compilación del código hasta la ejecución de la simulación.
+Se ha completado el ciclo de trabajo de simulación, desde la compilación del código hasta la ejecución de la simulación.
