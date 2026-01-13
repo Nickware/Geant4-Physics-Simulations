@@ -117,15 +117,11 @@ El campo se define en el archivo de construcción del detector.
 
 #### **2. Movimiento y Paso (Clase: `G4PropagatorInField`)**
 
-Geant4 no utiliza las ecuaciones analíticas del movimiento (como $r = p / (qB)$). En su lugar, usa un método numérico para simular la trayectoria, que está controlado por el **paso máximo** y la **precisión** del integrador.
+Geant4 no utiliza las ecuaciones analíticas del movimiento (como $r = p / (qB)$). En su lugar, usa un método numérico para simular la trayectoria, el cual está controlado por el **paso máximo** y la **precisión** del integrador.
 
 - **Integrador Numérico:** El `G4FieldManager` utiliza un integrador (como **Runge-Kutta 4th order**) para resolver numéricamente la ecuación de Lorentz:
 
-  $$ \\ \frac{d\mathbf{p}}{dt} = q(\mathbf{E} + \mathbf{v} \times \mathbf{B}) $$
-
-  $$$$
-
-  
+  $\frac{d\mathbf{p}}{dt} = q(\mathbf{E} + \mathbf{v} \times \mathbf{B})$
 
 - **Ajuste de la Precisión:** El campo magnético puede curvar drásticamente las trayectorias. Para que Geant4 no falle o genere resultados inexactos, es crucial ajustar el **tamaño máximo del paso** en el campo (`G4ChordFinder`). En Geant4, esto se hace en la `B4DetectorConstruction.cc` o en un *macro* de configuración:
 

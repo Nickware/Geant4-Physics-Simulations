@@ -4,7 +4,7 @@
 
 
 
-En esta fase, aprenderá a usar la consola interactiva de ROOT para leer y visualizar los datos generados por la simulación.
+En esta fase, se aprenderá a usar la consola interactiva de ROOT para leer y visualizar los datos generados por la simulación.
 
 
 
@@ -66,7 +66,7 @@ KEY: TH1D      3;1     energy spectrum (%): gamma
 
 
 
-Ahora que conoce los nombres exactos, puedes obtener un puntero al histograma que desee y dibujarlo.
+Ahora que conoce los nombres exactos, puede obtener un puntero al histograma que desee y dibujarlo.
 
 1. **Obtener el histograma**: Usar `f->Get()` y especificar el nombre correcto del histograma (ej. `"3"` para los fotones gamma).
 
