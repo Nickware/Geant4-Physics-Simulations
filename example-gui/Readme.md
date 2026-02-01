@@ -70,7 +70,7 @@ Estos son proyectos casi de nivel de investigación real, a menudo mantenidos po
 
 ## Resumen de Uso
 
-Si se necesita aprender algo específico, buscar así:
+Ruta de aprendizaje:
 
 1. **¿Conceptos base?** Ve a `basic/`.
 2. **¿Un proceso físico puntual (ej. efecto fotoeléctrico)?** Ve a `extended/electromagnetic/`.
