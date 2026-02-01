@@ -61,4 +61,4 @@ Este curso está dirigido a estudiantes de posgrado o de último año de grado e
 - Ciencia de materiales
 - Áreas afines
 
-**Requisito:** Tener conocimientos previos de física general y programación básica en C++.
+Requisito: Tener conocimientos previos de física general y programación básica en C++.
