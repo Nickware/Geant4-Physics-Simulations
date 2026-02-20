@@ -17,11 +17,11 @@ Este repositorio contiene dos scripts de Bash diseñados para facilitar la insta
   - `paquetes_fallidos.log`: Paquetes que han fallado o no se han encontrado (incluye sugerencias alternativas).
 
 #### Flujo de Uso
-1. **Verifica ejecución como root.**
-2. **Configura y actualiza repositorios.**
-3. **Actualiza el sistema.**
-4. **Instala una lista predefinida de paquetes, registrando el estado de cada uno.**
-5. **Ofrece un resumen y la consulta de los archivos de log al finalizar.**
+1. Verifica ejecución como root.
+2. Configura y actualiza repositorios.
+3. Actualiza el sistema.
+4. Instala una lista predefinida de paquetes, registrando el estado de cada uno.
+5. Ofrece un resumen y la consulta de los archivos de log al finalizar.
 
 #### Beneficios
 - Facilita la puesta a punto de Fedora tras una instalación limpia.
@@ -47,11 +47,11 @@ Este repositorio contiene dos scripts de Bash diseñados para facilitar la insta
   - `sugerencias_paquetes.log`: Paquetes alternativos sugeridos según coincidencia de nombre.
 
 #### Flujo de Uso
-1. **Actualiza y configura repositorios.**
-2. **Instala y verifica dependencias esenciales para Geant4, registrando alternativas si hay fallos.**
-3. **Solicita interactivamente parámetros para la instalación personalizada de Geant4.**
-4. **Descarga, descomprime, configura y compila Geant4 con soporte para visualización y utilización de recursos multicore.**
-5. **Reporta fallos de dependencias al usuario al finalizar.**
+1. Actualiza y configura repositorios.
+2. Instala y verifica dependencias esenciales para Geant4, registrando alternativas si hay fallos.
+3. Solicita interactivamente parámetros para la instalación personalizada de Geant4.
+4. Descarga, descomprime, configura y compila Geant4 con soporte para visualización y utilización de recursos multicore.
+5. Reporta fallos de dependencias al usuario al finalizar.
 
 #### Beneficios
 - Automatiza completamente el entorno recomendado por el manual oficial de Geant4.
