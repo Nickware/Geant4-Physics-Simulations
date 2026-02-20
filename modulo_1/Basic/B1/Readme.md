@@ -1,4 +1,4 @@
-# Ejercicio Práctico: Ejecutando el ejemplo Básico B1 de Geant4
+# Básico B1 de Geant4: Simulación simple del paso de una partícula a través de un detector
 
 Este ejercicio guiará a través de la compilación y ejecución del **ejemplo básico B1 de Geant4**, una simulación simple del paso de una partícula a través de un detector.
 
@@ -8,7 +8,7 @@ El objetivo es familiarizarse con el proceso de trabajo con proyectos de Geant4 
 
 ### Requisitos Previos
 
-Antes de comenzar, asegúrarse de tener instalados los siguientes programas en el sistema:
+Antes de comenzar, asegúrese de tener instalados los siguientes programas en el sistema:
 
   * **Geant4**: La versión 10.6.p03 o superior.
   * **CMake**: Versión 3.10 o superior.
@@ -46,11 +46,11 @@ mkdir build
 cd build
 ```
 
-#### 2\. Configurar el Proyecto con CMake
+#### 2\. Configurar el proyecto con CMake
 
 Ejecutar CMake para configurar el proyecto. Este paso verifica las dependencias y genera los archivos de compilación.
 
-Asegúrarse de reemplazar `/ruta/a/tu/instalacion/geant4` con la ruta real en el sistema.
+Asegurarse de reemplazar `/ruta/a/instalacion/geant4` con la ruta real en el sistema.
 
 ```bash
 # Configuración estándar
@@ -62,7 +62,7 @@ cmake -DGeant4_DIR=/opt/geant4.10.06.p03/lib/Geant4-10.6.3 -DGEANT4_USE_QT=OFF .
 
   * El `..` al final del comando le dice a CMake que el archivo de configuración (`CMakeLists.txt`) está en el directorio padre.
 
-#### 3\. Compilar el Código
+#### 3\. Compilar el código
 
 Una vez que CMake ha terminado (Observará los mensajes `-- Configuring done` y `-- Generating done`), puede compilar el código. La opción `-jN` (`-j4` en este caso) acelera el proceso usando múltiples núcleos del procesador.
 
