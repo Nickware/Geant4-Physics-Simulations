@@ -119,5 +119,5 @@ h->Draw();
 - [Manual de usuario de ROOT](https://root.cern/manual/)
 - Foros y tutoriales de la comunidad Geant4 y ROOT
 
-**Este flujo de trabajo es el estándar en simulaciones de física de partículas, radiación y aplicaciones médicas, permitiendo un ciclo completo desde la definición del experimento hasta el análisis avanzado de los resultados.**
+Este flujo de trabajo es el estándar en simulaciones de física de partículas, radiación y aplicaciones médicas, permitiendo un ciclo completo desde la definición del experimento hasta el análisis avanzado de los resultados.
 
