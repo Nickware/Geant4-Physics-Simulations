@@ -16,9 +16,9 @@ El ejemplo `B4` ya tiene la estructura de código para manejar campos, por lo qu
 
 #### **1. Requisitos y Dependencias**
 
-Asegúrarse de tener instalados los requisitos del sistema (**CMake**, **g++**, **Xerces-C++**, etc.), como hicimos para el ejemplo `B1`.
+Asegurarse de tener instalados los requisitos del sistema (**CMake**, **g++**, **Xerces-C++**, etc.), como hicimos para el ejemplo `B1`.
 
-#### **2. Compilación del Código Fuente**
+#### **2. Compilación del código fuente**
 
 Seguir la metodología estándar de CMake.
 
@@ -39,7 +39,7 @@ Seguir la metodología estándar de CMake.
    cd build
    ```
 
-3. Configurar el proyecto con **CMake**. (Recuerde la ruta correcta de tu Geant4).
+3. Configurar el proyecto con **CMake**. (Recuerde la ruta correcta de su Geant4).
 
    Bash
 
@@ -69,9 +69,9 @@ El ejemplo `B4` utiliza *scripts* de macro (`.mac`) para definir el campo.
    ./exampleB4
    ```
 
-2. Activar el Campo Magnético (si no lo hace el script por defecto):
+2. Activar el campo magnético (si no lo hace el script por defecto):
 
-   En la interfaz de Qt o en la consola interactiva, se puede definir un campo magnético uniforme de $0.5$ Tesla en la dirección $Z$.
+   En la interfaz de Qt o en la consola interactiva, se puede definir un campo magnético uniforme de $0.5$ tesla en la dirección $Z$.
 
    ```
    /globalField/setValue 0.5 tesla 0 0 0
@@ -85,19 +85,19 @@ El ejemplo `B4` utiliza *scripts* de macro (`.mac`) para definir el campo.
    /run/beamOn 1
    ```
 
-   Debera ver la trayectoria del positrón curvándose en el campo magnético.
+   Deberá ver la trayectoria del positrón curvándose en el campo magnético.
 
 ------
 
-### **Fase 2: Personalización del Modelo (El Código Clave)**
+### **Fase 2: Personalización del Modelo**
 
-Para entender cómo se modela el campo, se debe observar las dos clases clave en el código fuente de Geant4.
+Para entender cómo se modela el campo, se deben observar las dos clases clave en el código fuente de Geant4.
 
 #### **1. Definición del Campo (Clase: `B4DetectorConstruction.cc`)**
 
 El campo se define en el archivo de construcción del detector.
 
-- **¿Qué hace?** Esta clase crea y configura un objeto que representa el campo (por ejemplo, `G4UniformMagField` para un campo uniforme) y lo asigna al espacio físico (al "mundo" o a un volumen específico).
+- Esta clase crea y configura un objeto que representa el campo (por ejemplo, `G4UniformMagField` para un campo uniforme) y lo asigna al espacio físico (al "mundo" o a un volumen específico).
 
 - **Código clave (Conceptual):**
 
@@ -107,7 +107,7 @@ El campo se define en el archivo de construcción del detector.
   // 1. Crear el objeto del campo magnético (ej. 0.5 Tesla en Z)
   G4MagneticField* magField = new G4UniformMagField(G4ThreeVector(0.5*tesla, 0.0, 0.0));
   
-  // 2. Definir la región de la física que será afectada (Todo el mundo)
+  // 2. Definir la región de la física que será afectada (todo el mundo)
   G4FieldManager* fieldMgr = G4TransportationManager::GetTransportationManager()->GetFieldManager();
   fieldMgr->SetDetectorField(magField);
   fieldMgr->CreateChordFinder(magField);
