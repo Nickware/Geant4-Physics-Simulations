@@ -4,17 +4,17 @@
 
 # Instalación de ROOT con soporte para Python
 
-Paso a paso detallado para instalar ROOT desde el código fuente, asegurando el soporte para Python. Este método te da el mayor control sobre las dependencias.
+Paso a paso detallado para instalar ROOT desde el código fuente, asegurando el soporte para Python. Este método da el mayor control sobre las dependencias.
 
 ------
 
 ## Instalación de ROOT con Soporte para Python (PyROOT)
 
-El proceso de instalación se basa en **CMake** y sigue una metodología similar a la que se usas para Geant4.
+El proceso de instalación se basa en **CMake** y sigue una metodología similar a la que se usa para Geant4.
 
 ### Fase 1: Requisitos Previos
 
-Antes de compilar, asegurarse que se tiene instaladas las dependencias de desarrollo, especialmente para Python.
+Antes de compilar, asegurarse de que se tienen instaladas las dependencias de desarrollo, especialmente para Python.
 
 1. **Instalar dependencias básicas:** Asegurarse de tener `git`, `g++` (o similar), `make`, y `cmake`.
 
