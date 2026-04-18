@@ -77,6 +77,4 @@ Repitir el paso 4 para cualquier otro histograma que desee visualizar, reemplaza
 
 -----
 
-### Próximos Pasos
-
-Este proceso interactivo es solo el comienzo. Para un análisis más detallado, se recomienda escribir *macros* de ROOT (`.C` o `.cpp`) para automatizar el procesamiento de datos, realizar ajustes de curvas, o generar múltiples gráficos de manera programática.
+Para un análisis más detallado, se recomienda escribir *macros* de ROOT (`.C` o `.cpp`) para automatizar el procesamiento de datos, realizar ajustes de curvas, o generar múltiples gráficos de manera programática.
