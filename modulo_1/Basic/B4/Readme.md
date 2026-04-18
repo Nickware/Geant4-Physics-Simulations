@@ -117,7 +117,7 @@ El campo se define en el archivo de construcción del detector.
 
 #### **2. Movimiento y Paso (Clase: `G4PropagatorInField`)**
 
-Geant4 no utiliza las ecuaciones analíticas del movimiento (como $r = p / (qB)$). En su lugar, usa un método numérico para simular la trayectoria, el cual está controlado por el **paso máximo** y la **precisión** del integrador.
+Geant4 no utiliza las ecuaciones analíticas del movimiento como $\(r=p/(qB)\)$. En su lugar, usa un método numérico para simular la trayectoria, el cual está controlado por el **paso máximo** y la **precisión** del integrador.
 
 - **Integrador Numérico:** El `G4FieldManager` utiliza un integrador (como **Runge-Kutta 4th order**) para resolver numéricamente la ecuación de Lorentz:
 
