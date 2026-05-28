@@ -2,7 +2,7 @@
 
 
 
-# Instalación de ROOT con soporte para Python
+# Instalación de ROOT con Python
 
 Paso a paso detallado para instalar ROOT desde el código fuente, asegurando el soporte para Python. Este método da el mayor control sobre las dependencias.
 
