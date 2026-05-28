@@ -1,4 +1,4 @@
-## Simulación con Geant4 y análisis con ROOT (Flujo de trabajo)
+## Simulación con Geant4 y análisis con ROOT
 
 Este readme describe, paso a paso, cómo realizar una simulación de interacción de partículas con la materia usando **Geant4** y analizar los resultados con **ROOT**. Incluye la estructura de los archivos, comandos y recomendaciones para un flujo de trabajo reproducible.
 
