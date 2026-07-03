@@ -136,6 +136,26 @@ Para instalar ROOT en una distribución basada en **Fedora** (incluyendo AlmaLin
 
 Como mencionamos anteriormente, **Octave y Scilab no son módulos nativos de ROOT** ni se integran directamente. La forma profesional de trabajar es realizar el análisis en ROOT/PyROOT y exportar los resultados a formato `.csv` o `.root` para procesarlos posteriormente en Octave o Scilab.
 
+### 1. Habilitar el repositorio CRB
+
+Ejecutar este comando:
+
+```bash
+sudo dnf install -y crb
+sudo crb enable
+
+```
+
+#### 2. Actualizar el caché de DNF
+
+Después de habilitar el repositorio, se debe refrescar la lista de paquetes para que el sistema reconozca los nuevos paquetes `-devel` que antes no encontraba:
+
+```bash
+sudo dnf clean all
+sudo dnf makecache
+
+```
+
 ---
 
 ## Paso 1: Instalación de Dependencias
@@ -147,7 +167,8 @@ sudo dnf install -y cmake gcc-c++ gcc binutils libX11-devel libXpm-devel \
                  libXft-devel libXext-devel python3-devel python3-numpy \
                  openssl-devel pcre-devel mesa-libGLU-devel glew-devel \
                  ftgl-devel fftw-devel cfitsio-devel graphviz-devel \
-                 avahi-compat-libdnssd-devel libldap-devel
+                 avahi-compat-libdnssd-devel libldap-devel \
+                 graphviz-devel avahi-devel openldap-devel
 
 ```
 
