@@ -1,8 +1,6 @@
-
-
-
-
 # Instalación de ROOT con Python
+
+## Distribuciones derivadas de Debian
 
 Paso a paso detallado para instalar ROOT desde el código fuente, asegurando el soporte para Python. Este método da el mayor control sobre las dependencias.
 
@@ -12,7 +10,7 @@ Paso a paso detallado para instalar ROOT desde el código fuente, asegurando el 
 
 El proceso de instalación se basa en **CMake** y sigue una metodología similar a la que se usa para Geant4.
 
-### Fase 1: Requisitos Previos
+### Paso 1: Requisitos Previos
 
 Antes de compilar, asegurarse de que se tienen instaladas las dependencias de desarrollo, especialmente para Python.
 
@@ -36,7 +34,7 @@ Antes de compilar, asegurarse de que se tienen instaladas las dependencias de de
 
 
 
-### Fase 2: Descarga del Código Fuente
+### Paso 2: Descarga del Código Fuente
 
 
 
@@ -53,7 +51,7 @@ Antes de compilar, asegurarse de que se tienen instaladas las dependencias de de
 
 
 
-### Fase 3: Configuración con CMake (Activación de Python)
+### Paso 3: Configuración con CMake (Activación de Python)
 
 
 
@@ -84,7 +82,7 @@ Antes de compilar, asegurarse de que se tienen instaladas las dependencias de de
 
 
 
-### Fase 4: Compilación e Instalación
+### Paso 4: Compilación e Instalación
 
 
 
@@ -106,7 +104,7 @@ Antes de compilar, asegurarse de que se tienen instaladas las dependencias de de
 
 
 
-### Fase 5: Configuración del Entorno
+### Paso 5: Configuración del Entorno
 
 
 
@@ -131,3 +129,102 @@ Para que el sistema operativo sepa dónde encontrar los archivos y comandos de R
    ```
 
    Si no hay errores, ¡PyROOT está instalado correctamente!
+
+## Distribuciones derivadas de Fedora
+
+Para instalar ROOT en una distribución basada en **Fedora** (incluyendo AlmaLinux o Rocky), con soporte nativo para **Python**, sigue este procedimiento.
+
+Como mencionamos anteriormente, **Octave y Scilab no son módulos nativos de ROOT** ni se integran directamente. La forma profesional de trabajar es realizar el análisis en ROOT/PyROOT y exportar los resultados a formato `.csv` o `.root` para procesarlos posteriormente en Octave o Scilab.
+
+---
+
+## Paso 1: Instalación de Dependencias
+
+Abrir terminal y ejecutar el siguiente comando para preparar el sistema:
+
+```bash
+sudo dnf install -y cmake gcc-c++ gcc binutils libX11-devel libXpm-devel \
+                 libXft-devel libXext-devel python3-devel python3-numpy \
+                 openssl-devel pcre-devel mesa-libGLU-devel glew-devel \
+                 ftgl-devel fftw-devel cfitsio-devel graphviz-devel \
+                 avahi-compat-libdnssd-devel libldap-devel
+
+```
+
+## Paso 2: Descarga del Código Fuente
+
+Crear una carpeta de trabajo, descargar la versión estable y prepárala:
+
+```bash
+mkdir ~/root_install && cd ~/root_install
+# Clonar la versión más reciente (ej. v6-30-06)
+git clone --branch v6-30-06 --depth 1 https://github.com/root-project/root.git root_src
+mkdir build && cd build
+
+```
+
+## Paso 3: Configuración con CMake (Activación de Python)
+
+Aquí se indica a ROOT que habilite `PyROOT` y detecte automáticamente la instalación de Python:
+
+```bash
+cmake -DCMAKE_INSTALL_PREFIX=/opt/root \
+      -Dpyroot=ON \
+      -DPython3_EXECUTABLE=$(which python3) \
+      ../root_src
+
+```
+
+* **`-Dpyroot=ON`**: Activar el módulo para que se pueda importar ROOT en Python.
+* **`-DCMAKE_INSTALL_PREFIX`**: Definir la ruta donde se instalará el software.
+
+## Paso 4: Compilación e Instalación
+
+Usar todos los núcleos de tu procesador para acelerar el proceso:
+
+```bash
+make -j$(nproc)
+sudo make install
+
+```
+
+## Paso 5: Configuración del Entorno
+
+Para que su sistema reconozca los comandos de ROOT y el módulo de Python, añadir esta línea al final del archivo `~/.bashrc`:
+
+```bash
+source /opt/root/bin/thisroot.sh
+
+```
+
+Luego, aplicar los cambios con: `source ~/.bashrc`.
+
+---
+
+## ¿Cómo trabajar con Octave o Scilab?
+
+Como ROOT no tiene una librería de enlace directo (como un `import octave`), utilizar este flujo de trabajo científico:
+
+1. **Análisis en ROOT:** Utiliza PyROOT para leer los datos de simulación y realizar el filtrado estadístico o ajustes (fits).
+```python
+import ROOT
+# Cargar datos
+f = ROOT.TFile("rdecay01.root")
+tree = f.Get("ntuple")
+# Exportar datos necesarios a CSV para Octave
+with open("datos_analisis.csv", "w") as f_out:
+    for entry in tree:
+        f_out.write(f"{entry.energy}\n")
+
+```
+
+
+2. **Procesamiento en Octave/Scilab:**
+Carga el archivo generado por ROOT para continuar el análisis numérico:
+```octave
+datos = load('datos_analisis.csv');
+plot(datos);
+
+```
+
+Al usar este método, se puede aprovechar la potencia de **Geant4/ROOT** para la física de partículas y la especialización numérica de **Octave/Scilab** para el post-procesamiento.
