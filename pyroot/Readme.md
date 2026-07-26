@@ -24,8 +24,8 @@ Antes de compilar, asegurarse de que se tienen instaladas las dependencias de de
 
      ```
      sudo apt update
-     sudo apt install build-essential git libssl-dev libpcre3-dev \
-                    libftgl-dev libmysqlclient-dev libcfitsio-dev \
+     sudo apt install build-essential git libssl-dev libpcre2-dev \
+                    libftgl-dev default-libmysqlclient-dev libcfitsio-dev \
                     libblas-dev liblapack-dev libfftw3-dev libxml2-dev \
                     python3-dev python3-pip
      ```
