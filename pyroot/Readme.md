@@ -64,7 +64,10 @@ Antes de compilar, asegurarse de que se tienen instaladas las dependencias de de
    cd build
    ```
 
-2. **Ejecutar CMake con \*flags\* de Python:** Aquí es donde se le indica a ROOT qué sea el intérprete de Python para construir el soporte de `PyROOT`.
+2. **Ejecutar CMake con \*flags\* de Python:** 
+
+#### Plan A (en desarrollo)
+Aquí es donde se le indica a ROOT qué sea el intérprete de Python para construir el soporte de `PyROOT`.
 
    Bash
 
@@ -80,13 +83,20 @@ Antes de compilar, asegurarse de que se tienen instaladas las dependencias de de
    - **`-DPYTHON_EXECUTABLE`**: Indicar la ruta al binario de Python (obtenida con `$(which python3)`).
    - **`-DPYTHON_INCLUDE_DIR` y `-DPYTHON_LIBRARY`**: Asegurarse que se usen las cabeceras y librerías de desarrollo de Python instalado.
 
+#### Plan B 
 
+En caso de que la instrucción anterior no funcione correctamente, instalar cmake-gui y generar el cmake de instalación mediante esta via.
+
+ Bash
+
+   ```
+   sudo apt install -y cmake-gui
+   cmake-gui
+   ```
 
 ### Paso 4: Compilación e Instalación
 
-
-
-1. **Compila ROOT:**
+1. **Compilar ROOT:**
 
    Bash
 
@@ -94,7 +104,7 @@ Antes de compilar, asegurarse de que se tienen instaladas las dependencias de de
    make -j$(nproc) # Usa todos los núcleos disponibles
    ```
 
-2. **Instala ROOT:**
+2. **Instalar ROOT:**
 
    Bash
 
