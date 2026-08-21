@@ -2,7 +2,7 @@
 
 Geant4 organiza sus ejemplos en tres grandes categorías según su complejidad y propósito. 
 
-Todos los ejemplos se encontraran en el directorio `examples/`:
+Todos los ejemplos se encontrarán en el directorio `examples/`:
 
 ------
 
@@ -58,7 +58,7 @@ Estos son proyectos casi de nivel de investigación real, a menudo mantenidos po
 
 | **Ejemplo**             | **Aplicación**                                               |
 | ----------------------- | ------------------------------------------------------------ |
-| **brachytherapy**       | Tratamiento de cáncer mediante fuentes insertadas (Braquiterapia). |
+| **brachytherapy**       | Tratamiento del cáncer mediante fuentes insertadas (braquiterapia). |
 | **hadrontherapy**       | Simulación de centros de protonterapia o terapia de iones.   |
 | **human_phantom**       | Modelado de órganos humanos según la ICRP para protección radiológica. |
 | **microdosimetry**      | Simulación de efectos de radiación en células individuales.  |
@@ -72,7 +72,7 @@ Estos son proyectos casi de nivel de investigación real, a menudo mantenidos po
 
 Ruta de aprendizaje:
 
-1. **¿Conceptos base?** Ve a `basic/`.
-2. **¿Un proceso físico puntual (ej. efecto fotoeléctrico)?** Ve a `extended/electromagnetic/`.
-3. **¿Una aplicación médica o espacial completa?** Ve a `advanced/`.
+1. **¿Conceptos base?** ir a `basic/`.
+2. **¿Un proceso físico puntual (ej., efecto fotoeléctrico)?** ir a `extended/electromagnetic/`.
+3. **¿Una aplicación médica o espacial completa?** ir a `advanced/`.
 
