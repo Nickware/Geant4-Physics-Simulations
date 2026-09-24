@@ -26,12 +26,43 @@ installation/
 |-- fedora/
 |   |-- install_dependencies.sh
 |   `-- install_geant4.sh
+|-- config/
+|   `-- versions.env
+|-- guides/
+|   |-- debian-geant4.md
+|   `-- fedora-geant4.md
 |-- script_install_debian_users.sh
 |-- script_install_fedora_users.sh
 `-- script_essencials.sh
 ```
 
 Los scripts ubicados directamente en `installation/` se mantienen como puntos de entrada compatibles. Para instalaciones nuevas se pueden ejecutar los componentes directamente y repetir solo la etapa necesaria.
+
+## Guías paso a paso
+
+- [`guides/debian-geant4.md`](guides/debian-geant4.md): instalación manual y automatizada en Debian, Ubuntu y Deepin, incluyendo Geant4, ROOT y PyROOT.
+- [`guides/fedora-geant4.md`](guides/fedora-geant4.md): instalación en Fedora y sistemas RHEL mediante `dnf` o `yum`.
+
+El README funciona como índice y referencia de configuración; no repite el procedimiento completo. Las guías contienen los pasos manuales, automatizados y con Distrobox. Los scripts automatizan las etapas repetitivas y usan los valores fijados en `config/versions.env`.
+
+## Versiones y rutas centralizadas
+
+El archivo [`config/versions.env`](config/versions.env) define las versiones y ubicaciones predeterminadas de la pila:
+
+- Geant4 `11.2.1`.
+- ROOT `v6-30-06`.
+- Geant4 en `/opt/geant4`.
+- ROOT en `/opt/root`.
+- Fuentes y compilaciones en `/var/tmp/geant4-physics-install`.
+
+Para cambiar una versión o una ruta, edita este archivo antes de instalar. También se pueden proporcionar variables de entorno para una ejecución puntual, por ejemplo:
+
+```bash
+sudo env G4_VERSION=11.2.1 G4_PREFIX=/opt/geant4 ./debian/install_geant4.sh
+sudo env ROOT_BRANCH=v6-30-06 ROOT_INSTALL_PREFIX=/opt/root ./debian/install_root.sh
+```
+
+No se usa `latest-stable`: fijar una etiqueta concreta permite repetir la instalación y saber qué versión se probó.
 
 ## Scripts incluidos
 
@@ -41,7 +72,7 @@ Instala la pila completa en distribuciones basadas en Debian:
 
 - dependencias de compilación, Qt, OpenGL, GDML y Python;
 - Geant4 `11.2.1` en `/opt/geant4`;
-- ROOT desde la rama `latest-stable` en `/opt/root`;
+- ROOT desde la etiqueta `v6-30-06` en `/opt/root`;
 - soporte de PyROOT;
 - configuración del entorno mediante `/etc/profile.d/geant4-root.sh`.
 
@@ -124,7 +155,18 @@ sudo ./fedora/install_geant4.sh
 
 Actualmente no hay un instalador Fedora/RHEL separado para ROOT; el script Fedora instala únicamente Geant4.
 
-El instalador Debian crea `/etc/profile.d/geant4-root.sh`. Abre una terminal nueva o ejecuta `source /etc/profile.d/geant4-root.sh` para cargar el entorno.
+El instalador Debian crea `/etc/profile.d/geant4-root.sh` y no modifica `.bashrc`. Abre una terminal nueva o ejecuta `source /etc/profile.d/geant4-root.sh` para cargar el entorno. La ubicación puede cambiarse con `ENVIRONMENT_FILE`.
+
+## Verificación rápida
+
+Después de instalar Geant4 y cargar su entorno, comprueba la versión y la ruta:
+
+```bash
+geant4-config --version
+geant4-config --prefix
+```
+
+Si necesitas el procedimiento completo o el diagnóstico de un error, consulta la guía de tu distribución. Ambas guías incluyen también un flujo aislado mediante Distrobox.
 
 ## Documentación relacionada
 
