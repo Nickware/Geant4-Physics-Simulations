@@ -36,6 +36,82 @@ sudo ./script_install_debian_users.sh
 
 La configuración del entorno se escribe en `/etc/profile.d/geant4-root.sh`. No se modifica `.bashrc`.
 
+## Opción C: instalar en un contenedor Distrobox
+
+Distrobox permite mantener Geant4 y sus dependencias dentro de un contenedor Debian, sin mezclar paquetes con el sistema anfitrión. El proyecto y los archivos del usuario siguen siendo accesibles desde el contenedor.
+
+### 1. Instalar Distrobox en el sistema anfitrión
+
+En Debian o Ubuntu, instala Distrobox y Podman:
+
+```bash
+sudo apt update
+sudo apt install -y distrobox podman
+```
+
+Comprueba la instalación:
+
+```bash
+distrobox --version
+podman --version
+```
+
+### 2. Crear y entrar al contenedor
+
+Usa una imagen versionada para que el entorno sea reproducible:
+
+```bash
+distrobox create --name geant4-debian --image debian:12
+distrobox enter geant4-debian
+```
+
+Los siguientes comandos se ejecutan dentro del contenedor. El repositorio del proyecto estará disponible mediante los montajes de Distrobox.
+
+### 3. Preparar el contenedor
+
+Dentro del contenedor, instala Git y Sudo:
+
+```bash
+sudo apt update
+sudo apt install -y git sudo
+```
+
+Si la imagen no ofrece `sudo` configurado para el usuario de Distrobox, abre una shell administrativa desde el anfitrión con `distrobox enter --root geant4-debian`, instala `sudo` y vuelve a entrar normalmente.
+
+### 4. Ejecutar la instalación dentro del contenedor
+
+Desde la carpeta `installation/` del repositorio, ejecuta los componentes Debian:
+
+```bash
+sudo ./debian/install_dependencies.sh
+sudo ./debian/install_geant4.sh
+sudo ./debian/install_root.sh
+sudo ./debian/configure_environment.sh
+source /etc/profile.d/geant4-root.sh
+```
+
+La instalación se realiza dentro del contenedor. Las rutas `/opt/geant4` y `/opt/root` pertenecen al contenedor, no al sistema anfitrión.
+
+### 5. Verificar y salir
+
+```bash
+geant4-config --version
+geant4-config --prefix
+exit
+```
+
+Para volver a entrar más adelante:
+
+```bash
+distrobox enter geant4-debian
+```
+
+Para eliminar el entorno completo:
+
+```bash
+distrobox rm geant4-debian
+```
+
 ## Opción B: instalación manual
 
 ### 1. Instalar dependencias
@@ -113,3 +189,5 @@ Los README de `modulo_1/Basic/B1` y `geant4-root` documentan ejemplos concretos 
 - **Faltan Qt u OpenGL:** repite la instalación de dependencias y revisa que `GEANT4_USE_QT` y `GEANT4_USE_OPENGL_X11` sean compatibles con tu sistema.
 - **La compilación consume demasiados recursos:** sustituye `--parallel "$(nproc)"` por un número menor, por ejemplo `--parallel 2`.
 - **La descarga o compilación se interrumpe:** conserva el directorio de trabajo y vuelve a ejecutar CMake; no es necesario borrar todo el árbol de compilación.
+- **El contenedor no inicia:** comprueba que Podman esté disponible y que el usuario tenga permisos para ejecutar contenedores rootless.
+- **El proyecto no aparece dentro del contenedor:** entra desde la carpeta del repositorio o revisa los montajes mostrados por `distrobox list`.

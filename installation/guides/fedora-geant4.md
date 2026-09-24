@@ -34,6 +34,87 @@ sudo ./script_install_fedora_users.sh
 
 Este flujo instala Geant4, pero no instala ROOT ni configura automáticamente el entorno del usuario.
 
+## Opción B: instalar en un contenedor Distrobox
+
+Distrobox permite crear un entorno Fedora aislado para Geant4, aunque el sistema anfitrión sea Debian, Ubuntu u otra distribución. El contenedor comparte el directorio personal y permite trabajar con los archivos del repositorio desde el entorno aislado.
+
+### 1. Instalar Distrobox y Podman en el sistema anfitrión
+
+En Fedora:
+
+```bash
+sudo dnf install -y distrobox podman
+```
+
+En un anfitrión Debian o Ubuntu:
+
+```bash
+sudo apt update
+sudo apt install -y distrobox podman
+```
+
+Comprueba las herramientas:
+
+```bash
+distrobox --version
+podman --version
+```
+
+### 2. Crear y entrar al contenedor Fedora
+
+Usa una imagen versionada:
+
+```bash
+distrobox create --name geant4-fedora --image fedora:40
+distrobox enter geant4-fedora
+```
+
+Los siguientes comandos se ejecutan dentro del contenedor. El repositorio del proyecto estará disponible mediante los montajes de Distrobox.
+
+### 3. Preparar el contenedor
+
+Dentro del contenedor, instala Git, Sudo y Curl:
+
+```bash
+sudo dnf install -y git sudo curl
+```
+
+Si `sudo` no está disponible para el usuario, abre temporalmente una shell administrativa desde el anfitrión con `distrobox enter --root geant4-fedora`, instala los paquetes y vuelve a entrar como usuario normal.
+
+### 4. Ejecutar la instalación dentro del contenedor
+
+Desde la carpeta `installation/` del repositorio:
+
+```bash
+sudo ./fedora/install_dependencies.sh
+sudo ./fedora/install_geant4.sh
+```
+
+Acepta los valores predeterminados de versión, ruta y directorio de trabajo cuando el instalador los muestre. La instalación se realiza dentro del contenedor; `/opt/geant4` no modifica el sistema anfitrión.
+
+### 5. Cargar el entorno y verificar
+
+Dentro del contenedor:
+
+```bash
+source /opt/geant4/bin/geant4.sh
+geant4-config --version
+geant4-config --prefix
+exit
+```
+
+Para volver a entrar:
+
+```bash
+distrobox enter geant4-fedora
+```
+
+Para eliminar el contenedor:
+
+```bash
+distrobox rm geant4-fedora
+```
+
 ## Instalación manual
 
 ### 1. Instalar dependencias
@@ -117,3 +198,5 @@ Los README de `modulo_1/Basic/B1` y `geant4-root` documentan ejemplos concretos.
 - **Qt u OpenGL no están disponibles:** vuelve a ejecutar `sudo ./fedora/install_dependencies.sh` y revisa la salida de CMake.
 - **La compilación consume demasiados recursos:** reduce el paralelismo, por ejemplo `cmake --build build_dir --parallel 2`.
 - **La descarga falla:** comprueba la URL de `versions.env`, la conexión y el espacio disponible antes de repetirla.
+- **El contenedor no inicia:** comprueba que Podman esté disponible y que el usuario pueda ejecutar contenedores rootless.
+- **El repositorio no aparece dentro del contenedor:** entra desde la carpeta del repositorio o revisa los montajes con `distrobox list`.
