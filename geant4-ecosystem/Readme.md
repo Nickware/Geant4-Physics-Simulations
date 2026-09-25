@@ -37,6 +37,10 @@ Como las simulaciones de Monte Carlo son costosas computacionalmente:
 ### 5. Librerías de Soporte
 
 - **CLHEP:** Aunque Geant4 ya incluye muchas de sus funciones, sigue siendo la librería base para unidades físicas, álgebra lineal y generadores de números aleatorios en física de altas energías.
-- **GSL (GNU Scientific Library):** A menudo se enlaza con Geant4 para realizar cálculos matemáticos complejos, integraciones numéricas o ajustes de funciones durante el proceso de simulación.
+- **GSL (GNU Scientific Library):** A menudo se enlaza con Geant4 para realizar cálculos matemáticos complejos, integraciones numéricas o ajustes de funciones durante el proceso de simulación. Consulta el [ejemplo de integración GSL-Geant4](GSL_Geant4.md) para ver una configuración básica con CMake y un ajuste lineal de datos del detector.
+
+## Ejemplo práctico de integración
+
+El archivo [GSL_Geant4.md](GSL_Geant4.md) muestra cómo mantener separadas las responsabilidades: Geant4 simula el transporte y la energía depositada, mientras GSL procesa los resultados mediante algoritmos numéricos. Es una primera conexión entre una librería del ecosistema y una aplicación Geant4 del repositorio.
 
 Para mayor información revisar la página oficial de Geant4.
