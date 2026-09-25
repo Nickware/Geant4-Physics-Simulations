@@ -96,3 +96,13 @@ make install
 
 echo "Proceso finalizado. Geant4 instalado en ${path_geant4}."
 echo "Logs de instalación disponibles en ${LOG_SUCCESS} y ${LOG_FAIL}."
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+"${SCRIPT_DIR}/fedora/install_dependencies.sh"
+"${SCRIPT_DIR}/fedora/install_geant4.sh"
+
+echo "Geant4 fue instalado. ROOT debe instalarse mediante un procedimiento separado."

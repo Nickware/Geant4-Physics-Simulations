@@ -1,98 +1,135 @@
-# Automatización de Instalación de Paquetes en Fedora
+# Instalación del entorno Geant4 y ROOT
 
-Este repositorio contiene dos scripts de Bash diseñados para facilitar la instalación de paquetes y dependencias en sistemas **Fedora Linux**. Uno está orientado a la configuración general y multimedia del sistema, y el otro automatiza la preparación del entorno para la instalación de **Geant4** (un toolkit para la simulación de partículas en física).
+Esta carpeta reúne documentación y scripts de Bash para preparar un entorno de desarrollo científico con **Geant4**, **ROOT**, **PyROOT** y sus dependencias. Los scripts tienen distintos alcances: uno instala la pila completa en sistemas Debian, otro compila Geant4 en Fedora/RHEL y otro instala paquetes generales del sistema.
 
----
+## Seleccionar el instalador
 
-## Scripts Incluidos
+| Sistema o necesidad | Script recomendado | Resultado |
+| --- | --- | --- |
+| Debian, Ubuntu o Deepin | `script_install_debian_users.sh` | Instala dependencias, Geant4 y ROOT con PyROOT |
+| Fedora, RHEL, Rocky, AlmaLinux o CentOS | `script_install_fedora_users.sh` | Instala dependencias y compila Geant4 |
+| Paquetes generales en Fedora/RHEL | `script_essencials.sh` | Instala herramientas generales y paquetes multimedia |
 
-### 1. `instalador_fedora.sh`
+Los scripts no son intercambiables: el instalador Debian compila también ROOT, mientras que el instalador Fedora/RHEL no instala ROOT.
 
-#### Funcionalidad
-- Automatiza la instalación de un conjunto amplio de paquetes útiles para usuarios de Fedora (multimedia, utilitarios, desarrollo, idiomas, etc.).
-- Agrega y configura los repositorios más populares: **EPEL** y **RPM Fusion** (free y nonfree). También intenta agregar **ElRepo** de forma opcional.
-- Actualiza el sistema antes de instalar los paquetes.
-- Registra en dos archivos de log:
-  - `paquetes_instalados.log`: Paquetes instalados exitosamente.
-  - `paquetes_fallidos.log`: Paquetes que han fallado o no se han encontrado (incluye sugerencias alternativas).
+## Estructura por componentes
 
-#### Flujo de Uso
-1. Verifica ejecución como root.
-2. Configura y actualiza repositorios.
-3. Actualiza el sistema.
-4. Instala una lista predefinida de paquetes, registrando el estado de cada uno.
-5. Ofrece un resumen y la consulta de los archivos de log al finalizar.
+Los instaladores principales delegan en scripts más pequeños organizados por sistema operativo:
 
-#### Beneficios
-- Facilita la puesta a punto de Fedora tras una instalación limpia.
-- Permite auditar fácilmente los errores y soluciones propuestas.
-- Adaptable a otras listas de paquetes según las necesidades del usuario.
+```text
+installation/
+|-- debian/
+|   |-- install_dependencies.sh
+|   |-- install_geant4.sh
+|   |-- install_root.sh
+|   `-- configure_environment.sh
+|-- fedora/
+|   |-- install_dependencies.sh
+|   `-- install_geant4.sh
+|-- script_install_debian_users.sh
+|-- script_install_fedora_users.sh
+`-- script_essencials.sh
+```
 
----
+Los scripts ubicados directamente en `installation/` se mantienen como puntos de entrada compatibles. Para instalaciones nuevas se pueden ejecutar los componentes directamente y repetir solo la etapa necesaria.
 
-### 2. `instalador_geant4_fedora.sh`
+## Scripts incluidos
 
-#### Funcionalidad
-- Automatiza la instalación de **todas las dependencias recomendadas por Geant4** para el entorno de desarrollo y visualización en Fedora.
-- Añade **EPEL** y **ElRepo** para ampliar la disponibilidad de paquetes.
-- Verifica la presencia de cada paquete antes de intentar su instalación y, si no está disponible, lo registra junto a sugerencias de nombres similares.
-- Solicita al usuario información clave para la instalación de Geant4:
-  - Ruta de instalación.
-  - Carpeta temporal de trabajo (descarga y compilación).
-  - Link de descarga del código fuente.
-  - Directorio de build y ruta del código fuente extraído.
-- Automatiza el proceso de compilación y hace uso de todos los núcleos del sistema disponibles.
-- Registra:
-  - `paquetes_faltantes.log`: Paquetes que no se pudieron instalar.
-  - `sugerencias_paquetes.log`: Paquetes alternativos sugeridos según coincidencia de nombre.
+### `script_install_debian_users.sh`
 
-#### Flujo de Uso
-1. Actualiza y configura repositorios.
-2. Instala y verifica dependencias esenciales para Geant4, registrando alternativas si hay fallos.
-3. Solicita interactivamente parámetros para la instalación personalizada de Geant4.
-4. Descarga, descomprime, configura y compila Geant4 con soporte para visualización y utilización de recursos multicore.
-5. Reporta fallos de dependencias al usuario al finalizar.
+Instala la pila completa en distribuciones basadas en Debian:
 
-#### Beneficios
-- Automatiza completamente el entorno recomendado por el manual oficial de Geant4.
-- Ahorra pasos manuales y reduce errores.
-- Transparencia total ante cualquier problema de dependencias o paquetes ausentes.
+- dependencias de compilación, Qt, OpenGL, GDML y Python;
+- Geant4 `11.2.1` en `/opt/geant4`;
+- ROOT desde la rama `latest-stable` en `/opt/root`;
+- soporte de PyROOT;
+- configuración del entorno mediante `/etc/profile.d/geant4-root.sh`.
 
----
+Requiere `apt`, acceso a Internet, espacio suficiente para compilar ambos proyectos y permisos para instalar paquetes y escribir en `/opt`.
 
-## Requisitos Generales
+### `script_install_fedora_users.sh`
 
-- Ambos scripts deben ejecutarse con privilegios de **root** (`sudo` o como superusuario).
-- Requieren una conexión a Internet funcional.
-- Probados sobre versiones recientes de Fedora (ajuste esperado para futuros releases).
+Prepara y compila Geant4 en sistemas de la familia Fedora/RHEL:
 
----
+- detecta `dnf` o `yum`;
+- instala dependencias de Qt, X11, Motif, OpenGL y GDML;
+- solicita la ruta de instalación, la carpeta temporal y la URL del código fuente;
+- descarga y extrae un archivo `.zip`, `.tar.gz` o `.tgz`;
+- configura Geant4 con CMake y lo compila usando todos los núcleos disponibles;
+- registra paquetes instalados y fallidos.
 
-## Archivos de Log
+Este script instala Geant4, pero no instala ROOT ni configura automáticamente el entorno del usuario.
 
-Cada script deja archivos de log claros que ayudan:
-- A identificar paquetes instalados correctamente.
-- A ubicar errores y encontrar alternativas sugeridas para solucionar problemas de dependencias.
+### `script_essencials.sh`
 
----
+Instala paquetes generales en Fedora y sistemas de la familia RHEL. Puede configurar EPEL y RPM Fusion e instala herramientas como `wget`, `curl`, `unzip`, compiladores, paquetes multimedia, Java y utilidades del sistema.
+
+Este script no compila Geant4 ni ROOT. Es opcional y sirve como preparación general del sistema.
+
+## Requisitos generales
+
+- Leer el script y confirmar sus rutas antes de ejecutarlo.
+- Tener una conexión a Internet funcional.
+- Disponer de varios gigabytes libres para las fuentes, la compilación y la instalación.
+- Usar una distribución compatible con el gestor de paquetes del script.
+- Ejecutar con privilegios suficientes para instalar paquetes y escribir en las rutas elegidas.
+- Revisar los mensajes y logs aunque el script finalice correctamente.
+
+Los scripts actuales no ofrecen todavía un modo `--dry-run` ni selección de componentes. La instalación completa puede tardar bastante, especialmente al compilar Geant4 y ROOT.
+
+## Archivos de log
+
+Los scripts Fedora/RHEL crean en el directorio desde el que se ejecutan:
+
+- `paquetes_instalados.log`: salida de las instalaciones exitosas.
+- `paquetes_fallidos.log`: paquetes que no pudieron instalarse y resultados de búsqueda de alternativas.
+
+Estos archivos se sobrescriben al comenzar una nueva ejecución. Conviene copiarlos o renombrarlos antes de repetir una instalación.
 
 ## Ejecución
 
-```bash
-sudo ./instalador_fedora.sh
-```
-o
+Desde la carpeta `installation/`, en Fedora/RHEL, para instalar Geant4:
 
 ```bash
-sudo ./instalador_geant4_fedora.sh
+sudo ./script_install_fedora_users.sh
 ```
 
-## Licencia
+Para la preparación general del sistema:
 
-Uso libre bajo licencia MIT o similar.
+```bash
+sudo ./script_essencials.sh
+```
 
----
+En Debian/Ubuntu/Deepin:
 
-¡Este script automatiza el entorno Fedora, de manera segura y eficiente empleando Geant4 Y ROOT!
+```bash
+sudo ./script_install_debian_users.sh
+```
+
+También es posible ejecutar cada etapa Debian por separado:
+
+```bash
+sudo ./debian/install_dependencies.sh
+sudo ./debian/install_geant4.sh
+sudo ./debian/install_root.sh
+sudo ./debian/configure_environment.sh
+```
+
+En Fedora/RHEL, las etapas equivalentes son:
+
+```bash
+sudo ./fedora/install_dependencies.sh
+sudo ./fedora/install_geant4.sh
+```
+
+Actualmente no hay un instalador Fedora/RHEL separado para ROOT; el script Fedora instala únicamente Geant4.
+
+El instalador Debian crea `/etc/profile.d/geant4-root.sh`. Abre una terminal nueva o ejecuta `source /etc/profile.d/geant4-root.sh` para cargar el entorno.
+
+## Documentación relacionada
+
+- [`Configuration_visual_code.md`](Configuration_visual_code.md): configuración de VS Code para proyectos Geant4.
+- [`Root.md`](Root.md): notas sobre la instalación y configuración de ROOT.
+- [`example.txt`](example.txt): ejemplos y comandos auxiliares de instalación.
 
 
