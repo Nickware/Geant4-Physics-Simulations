@@ -7,9 +7,20 @@ if [[ "${EUID}" -ne 0 ]]; then
     exit 1
 fi
 
-read -rp "Ruta de instalación (ej: /opt/geant4): " G4_PREFIX
-read -rp "Ruta de trabajo temporal (ej: /tmp/geant4_build): " WORK_DIR
-read -rp "URL del código fuente (.zip, .tar.gz o .tgz): " SOURCE_URL
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=../config/versions.env
+source "${SCRIPT_DIR}/../config/versions.env"
+
+G4_PREFIX="${G4_PREFIX:-${GEANT4_PREFIX}}"
+WORK_DIR="${WORK_DIR:-${INSTALL_WORK_DIR}}"
+SOURCE_URL="${SOURCE_URL:-${GEANT4_SOURCE_URL}}"
+
+read -rp "Ruta de instalación [${G4_PREFIX}]: " input_prefix
+read -rp "Ruta de trabajo [${WORK_DIR}]: " input_work_dir
+read -rp "URL del código fuente [${SOURCE_URL}]: " input_source_url
+G4_PREFIX="${input_prefix:-${G4_PREFIX}}"
+WORK_DIR="${input_work_dir:-${WORK_DIR}}"
+SOURCE_URL="${input_source_url:-${SOURCE_URL}}"
 
 mkdir -p "${G4_PREFIX}" "${WORK_DIR}"
 cd "${WORK_DIR}"
