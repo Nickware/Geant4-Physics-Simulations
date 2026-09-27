@@ -62,7 +62,7 @@ El repositorio sigue el flujo completo de trabajo de una simulación: preparar e
 - **[modulo_1/extended/radioactivatedecay/rdecay01/](modulo_1/extended/radioactivatedecay/rdecay01/):** aplicación de física nuclear para simular decaimientos radiactivos y producir datos de salida en formato ROOT.
 - **[modulo_1/Basic/ROOT/](modulo_1/Basic/ROOT/):** guía para abrir, inspeccionar y visualizar con ROOT los histogramas generados por las simulaciones, especialmente `rdecay01`.
 - **[pyroot/](pyroot/):** instalación y configuración de ROOT con soporte para Python mediante PyROOT, ampliando las posibilidades de análisis y automatización.
-- **[example-gui/](example-gui/):** guía de referencia de los ejemplos básicos, extendidos y avanzados incluidos en el ecosistema de Geant4.
+- **[geant4-examples-guide/](geant4-examples-guide/):** catálogo de referencia de los ejemplos básicos, extendidos y avanzados incluidos en Geant4.
 - **[geant4-ecosystem/](geant4-ecosystem/):** tecnologías que complementan Geant4, como GATE, TOPAS, GDML, DICOM, Qt y herramientas para computación de alto rendimiento.
 
 ## Ruta de Aprendizaje y Flujo de Trabajo
@@ -74,7 +74,7 @@ Se recomienda avanzar por el repositorio en este orden:
 3. Comenzar con el ejemplo **B1** y continuar con **B4** para introducir campos y trayectorias.
 4. Estudiar **`rdecay01`** como aplicación de física nuclear y generar sus archivos `.root`.
 5. Analizar esos resultados con la guía de **ROOT** o mediante **PyROOT**.
-6. Consultar **`example-gui/`** y **`geant4-ecosystem/`** para explorar aplicaciones más avanzadas.
+6. Consultar **`geant4-examples-guide/`** y **`geant4-ecosystem/`** para explorar aplicaciones más avanzadas.
 
 Este recorrido conecta los objetivos teóricos del curso con un ciclo reproducible de trabajo:
 

@@ -1,8 +1,8 @@
-# Guía de ejemplo en Geant4
+# Guía del catálogo de ejemplos de Geant4
 
-Geant4 organiza sus ejemplos en tres grandes categorías según su complejidad y propósito. 
+Esta carpeta contiene una guía de referencia del catálogo de ejemplos que se distribuye con Geant4. No contiene una interfaz gráfica ni copia los ejemplos; su objetivo es ayudar a elegir un ejemplo según el nivel de dificultad, el proceso físico o el tipo de aplicación que se quiera estudiar.
 
-Todos los ejemplos se encontrarán en el directorio `examples/`:
+Los ejemplos se encuentran dentro del directorio `examples/` de la instalación de Geant4 y se organizan en tres categorías según su complejidad y propósito.
 
 ------
 
@@ -68,11 +68,15 @@ Estos son proyectos casi de nivel de investigación real, a menudo mantenidos po
 
 ------
 
-## Resumen de Uso
+## Cómo Usar Esta Guía
 
-Ruta de aprendizaje:
+Usa el catálogo como índice para localizar los ejemplos oficiales en tu instalación de Geant4. Para una ruta de aprendizaje progresiva:
 
 1. **¿Conceptos base?** ir a `basic/`.
 2. **¿Un proceso físico puntual (ej., efecto fotoeléctrico)?** ir a `extended/electromagnetic/`.
 3. **¿Una aplicación médica o espacial completa?** ir a `advanced/`.
+
+Después de seleccionar un ejemplo, cópialo o ejecútalo desde la instalación de Geant4 siguiendo sus propios archivos `README`, `CMakeLists.txt` y macros de ejecución. En este repositorio, los ejercicios de [modulo_1/](../modulo_1/) sirven como prácticas guiadas basadas en algunos de estos ejemplos, como B1, B4 y `rdecay01`.
+
+La visualización mediante Qt, OpenGL u otros drivers forma parte de las capacidades de Geant4 y de cada ejemplo; no es el propósito de esta carpeta.
 
