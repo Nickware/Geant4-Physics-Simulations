@@ -43,11 +43,44 @@ El programa está estructurado en los siguientes módulos:
 - **Electromagnetismo en Geant4:**  
   Procesos EM clave (ionización, bremsstrahlung, Compton, fotoeléctrico, etc.) y su configuración en Geant4.
 - **Física Moderna y Relativista:**  
-  Cinématica de partículas y fenómenos como la radiación Cherenkov.
+  Cinemática de partículas y fenómenos como la radiación Cherenkov.
 - **Física Nuclear y Hadrónica en Geant4:**  
   Decaimientos radiactivos (G4RadioactiveDecay), interacción de neutrones y modelos hadrónicos.
 - **Análisis de Datos con ROOT:**  
   Herramientas para lectura, procesamiento, visualización y ajuste de datos provenientes de simulaciones.
+
+---
+
+## Organización del Repositorio
+
+El repositorio sigue el flujo completo de trabajo de una simulación: preparar el entorno, construir una aplicación Geant4, ejecutar un proceso físico y analizar los resultados.
+
+- **[installation/](installation/):** instrucciones y scripts para instalar y configurar Geant4, ROOT y sus dependencias en distribuciones basadas en Debian y Fedora.
+- **[geant4-root/](geant4-root/):** proyecto base que integra Geant4 y ROOT. Incluye la definición de la geometría, la configuración con CMake, la visualización y el almacenamiento de resultados.
+- **[modulo_1/Basic/B1/](modulo_1/Basic/B1/):** primer ejercicio práctico de Geant4, centrado en compilar y ejecutar una simulación sencilla del paso de una partícula por un detector.
+- **[modulo_1/Basic/B4/](modulo_1/Basic/B4/):** ejercicio sobre el movimiento de partículas cargadas en un campo magnético y el seguimiento numérico de sus trayectorias.
+- **[modulo_1/extended/radioactivatedecay/rdecay01/](modulo_1/extended/radioactivatedecay/rdecay01/):** aplicación de física nuclear para simular decaimientos radiactivos y producir datos de salida en formato ROOT.
+- **[modulo_1/Basic/ROOT/](modulo_1/Basic/ROOT/):** guía para abrir, inspeccionar y visualizar con ROOT los histogramas generados por las simulaciones, especialmente `rdecay01`.
+- **[pyroot/](pyroot/):** instalación y configuración de ROOT con soporte para Python mediante PyROOT, ampliando las posibilidades de análisis y automatización.
+- **[example-gui/](example-gui/):** guía de referencia de los ejemplos básicos, extendidos y avanzados incluidos en el ecosistema de Geant4.
+- **[geant4-ecosystem/](geant4-ecosystem/):** tecnologías que complementan Geant4, como GATE, TOPAS, GDML, DICOM, Qt y herramientas para computación de alto rendimiento.
+
+## Ruta de Aprendizaje y Flujo de Trabajo
+
+Se recomienda avanzar por el repositorio en este orden:
+
+1. Preparar las dependencias siguiendo las instrucciones de **`installation/`**.
+2. Repasar la estructura de una aplicación Geant4 con **`geant4-root/`**.
+3. Comenzar con el ejemplo **B1** y continuar con **B4** para introducir campos y trayectorias.
+4. Estudiar **`rdecay01`** como aplicación de física nuclear y generar sus archivos `.root`.
+5. Analizar esos resultados con la guía de **ROOT** o mediante **PyROOT**.
+6. Consultar **`example-gui/`** y **`geant4-ecosystem/`** para explorar aplicaciones más avanzadas.
+
+Este recorrido conecta los objetivos teóricos del curso con un ciclo reproducible de trabajo:
+
+```text
+Instalación -> compilación -> simulación -> generación de datos -> análisis -> ampliación
+```
 
 ---
 
