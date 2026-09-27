@@ -7,9 +7,13 @@ if [[ "${EUID}" -ne 0 ]]; then
     exit 1
 fi
 
-G4_VERSION="${G4_VERSION:-11.2.1}"
-G4_PREFIX="${G4_PREFIX:-/opt/geant4}"
-WORK_DIR="${WORK_DIR:-${HOME}/physics_software}"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=../config/versions.env
+source "${SCRIPT_DIR}/../config/versions.env"
+
+G4_VERSION="${G4_VERSION:-${GEANT4_VERSION}}"
+G4_PREFIX="${G4_PREFIX:-${GEANT4_PREFIX}}"
+WORK_DIR="${WORK_DIR:-${INSTALL_WORK_DIR}}"
 SOURCE_DIR="${WORK_DIR}/geant4-${G4_VERSION}-src"
 BUILD_DIR="${WORK_DIR}/geant4-${G4_VERSION}-build"
 
@@ -18,7 +22,7 @@ cd "${WORK_DIR}"
 
 if [[ ! -d "${SOURCE_DIR}" ]]; then
     git clone --branch "v${G4_VERSION}" --depth 1 \
-        https://github.com/Geant4/geant4.git "${SOURCE_DIR}"
+    "${GEANT4_GIT_URL}" "${SOURCE_DIR}"
 fi
 
 cmake -S "${SOURCE_DIR}" -B "${BUILD_DIR}" \

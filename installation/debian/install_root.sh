@@ -7,9 +7,13 @@ if [[ "${EUID}" -ne 0 ]]; then
     exit 1
 fi
 
-ROOT_BRANCH="${ROOT_BRANCH:-v6-30-06}"
-ROOT_PREFIX="${ROOT_PREFIX:-/opt/root}"
-WORK_DIR="${WORK_DIR:-${HOME}/physics_software}"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=../config/versions.env
+source "${SCRIPT_DIR}/../config/versions.env"
+
+ROOT_BRANCH="${ROOT_BRANCH:-${ROOT_VERSION}}"
+ROOT_PREFIX="${ROOT_INSTALL_PREFIX:-${ROOT_PREFIX}}"
+WORK_DIR="${WORK_DIR:-${INSTALL_WORK_DIR}}"
 SOURCE_DIR="${WORK_DIR}/root-src"
 BUILD_DIR="${WORK_DIR}/root-build"
 
@@ -18,7 +22,7 @@ cd "${WORK_DIR}"
 
 if [[ ! -d "${SOURCE_DIR}" ]]; then
     git clone --branch "${ROOT_BRANCH}" --depth 1 \
-        https://github.com/root-project/root.git "${SOURCE_DIR}"
+        "${ROOT_SOURCE_URL}" "${SOURCE_DIR}"
 fi
 
 cmake -S "${SOURCE_DIR}" -B "${BUILD_DIR}" \

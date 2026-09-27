@@ -7,16 +7,20 @@ if [[ "${EUID}" -ne 0 ]]; then
     exit 1
 fi
 
-G4_PREFIX="${G4_PREFIX:-/opt/geant4}"
-ROOT_PREFIX="${ROOT_PREFIX:-/opt/root}"
-PROFILE_FILE="/etc/profile.d/geant4-root.sh"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=../config/versions.env
+source "${SCRIPT_DIR}/../config/versions.env"
+
+G4_PREFIX="${G4_PREFIX:-${GEANT4_PREFIX}}"
+ROOT_PREFIX="${ROOT_INSTALL_PREFIX:-${ROOT_PREFIX}}"
+PROFILE_FILE="${PROFILE_FILE:-${ENVIRONMENT_FILE}}"
 
 cat > "${PROFILE_FILE}" <<EOF
 # Entorno generado por Geant4-Physics-Simulations.
-if [[ -f "${G4_PREFIX}/bin/geant4.sh" ]]; then
+if [ -f "${G4_PREFIX}/bin/geant4.sh" ]; then
     source "${G4_PREFIX}/bin/geant4.sh"
 fi
-if [[ -f "${ROOT_PREFIX}/bin/thisroot.sh" ]]; then
+if [ -f "${ROOT_PREFIX}/bin/thisroot.sh" ]; then
     source "${ROOT_PREFIX}/bin/thisroot.sh"
 fi
 EOF
